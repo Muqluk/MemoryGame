@@ -1,5 +1,11 @@
+@import '../../App/Static/vars.scss';
+@import '../../App/Static/vars.scss';
+
 .navigation {
-  color: darkgoldenrod;
+  color: $border-dark;
+  user-select: none;
+  user-drag: none;
+  -webkit-user-drag: none;
   &.top__nav {
     ul {
       list-style-type: none;
@@ -8,13 +14,13 @@
         display: inline-block;
         & a {
           text-decoration: none;
-          color: darkgoldenrod;
+          color: $border-dark;
         }
       }
     }
   }
   .selected {
-    background-color: #333;
-    color: gold !important;
+    // background-color: #333;
+    color: $border-bright !important;
   }
 }

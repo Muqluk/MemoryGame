@@ -1,7 +1,3 @@
-// const imageStyle = (props) => ({
-//   backgroundImage: `url(${props.icon}`,
-// });
-
 export const GameCard = (props) => {
   const imageStyle = props.isVisible
     ? { backgroundImage: `url(${props.icon}` }
