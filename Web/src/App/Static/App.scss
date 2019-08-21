@@ -1,0 +1,20 @@
+@import './vars.scss';
+
+html {
+  height: 98%;
+}
+body{
+background: #222222;
+color: goldenrod;
+padding: 0 50px;
+font-size: 1.5rem;
+height: 95%;
+}
+
+#main{
+  height: 100%;
+}
+
+.app {
+  height: 100%;
+}

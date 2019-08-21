@@ -1,0 +1,20 @@
+.navigation {
+  color: darkgoldenrod;
+  &.top__nav {
+    ul {
+      list-style-type: none;
+      li {
+        margin: 3px 15px;
+        display: inline-block;
+        & a {
+          text-decoration: none;
+          color: darkgoldenrod;
+        }
+      }
+    }
+  }
+  .selected {
+    background-color: #333;
+    color: gold !important;
+  }
+}

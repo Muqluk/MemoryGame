@@ -1,0 +1,5 @@
+export const Constants = {
+  GET_PLAYERS: 'GET_PLAYSERS',
+  ADD_PLAYER: 'ADD_PLAYER',
+  REMOVE_PLAYER: 'REMOVE_PLAYER',
+};
