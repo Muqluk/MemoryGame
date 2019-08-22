@@ -2,9 +2,9 @@ import { fromJS } from 'immutable';
 
 const Decks = ['Minions'];
 
-const Card = () => ({
+// const Card = () => ({
 
-});
+// });
 
 const initialState = fromJS({
   Game: {

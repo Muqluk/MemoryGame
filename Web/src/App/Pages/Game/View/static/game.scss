@@ -1,0 +1,26 @@
+@import './gamevars.scss';
+
+.game {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  color: $border-bright;
+  .menu {
+    background: #333; // remove later.
+  }
+  .content{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .cardrow{
+    display: flex;
+    flex-direction: row;
+  }
+  .panel-flowControl {
+    width: $flowControlWidth;
+  }
+  .panel-board {
+    width: $boardWidth;
+  }
+}

@@ -13,7 +13,7 @@ import { GameBoardView } from './GameBoardView';
 import * as selector from '../ViewModel/selectors';
 import * as action from '../Model/actions';
 
-import './game.scss';
+import './static/game.scss';
 
 const GameView = (props) => {
   console.log('Game props: ', props);

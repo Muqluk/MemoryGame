@@ -1,0 +1,11 @@
+@import '../../../../Static/vars.scss';
+
+/* heights  */
+  $cardheight: 75px;
+
+/* widths */
+  $flowControlWidth: 250px;
+  $boardWidth: calc(100% - #{$flowControlWidth});
+  $cardwidth: 75px;
+
+/* text */

@@ -21,7 +21,6 @@ export function routeReducer(state = routeInitialState, action) {
 }
 
 export default function createReducer(injectedReducers, history) {
-  console.log(injectedReducers);
   return combineReducers({
     // router: routeReducer,
     router: connectRouter(history),

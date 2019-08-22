@@ -55,8 +55,8 @@ module.exports = {
     'import/no-unresolved': [2, { caseSensitive: true }],
     'no-use-before-define': 0,
     'arrow-parens': ["error", "always"],
-    /*  
-    *  react specific 
+    /*
+    *  react specific
     */
     'react/destructuring-assignment': 0,
     'react/react-in-jsx-scope': 0,
@@ -64,7 +64,7 @@ module.exports = {
     'react/jsx-indent-props': [2, 2],
     'react/jsx-first-prop-new-line': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    'react/jsx-closing-bracket-location': [1, 'after-props'],
+    // 'react/jsx-closing-bracket-location':  'warn',//[1, 'after-props'],
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'react/prop-types': 0,

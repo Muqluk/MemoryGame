@@ -1,15 +1,19 @@
 export const Cards = () => {
-  const cards = [];
+  let cards = [];
+
+  this.getCards = () => (cards);
+
+  this.setCards = (newCards) => {
+    cards = newCards;
+  };
+
+  this.clearCards = () => {
+    cards = [];
+  };
+
+  this.addCard = () => { };
+
+  this.removeCard = () => { };
+
+  this.updateCard = () => { };
 };
-
-Cards.prototype.getCards = () => { };
-Cards.prototype.setCards = () => { };
-Cards.prototype.clearCards = () => {
-  cards = [];
-};
-Cards.prototype.addCard = () => { };
-Cards.prototype.removeCard = () => { };
-Cards.prototype.updateCard = () => { };
-
-
-Cards.prototype.getCards = () => { };
