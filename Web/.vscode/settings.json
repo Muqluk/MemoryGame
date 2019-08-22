@@ -1,18 +1,18 @@
 {
   "files.exclude": {
-    "**/coverage": false,
-    "**/LICENSE": false,
-    "**/package-lock.json": false,
-    "**/__tests__": false,
-    "**/.vscode": false,
-    "**/conf": false,
-    "**/node_modules": false,
-    "**/.babelrc": false,
-    "**/.eslintignore": false,
-    "**/webpack.config.js": false,
-    "**/.eslintrc.js": false,
-    "**/middle_of_update_package.json.js": false,
-    "**/package.json": false,
-    "**/tsconfig.json": false
+    "**/coverage": true,
+    "**/LICENSE": true,
+    "**/package-lock.json": true,
+    "**/__tests__": true,
+    "**/.vscode": true,
+    "**/conf": true,
+    "**/node_modules": true,
+    "**/.babelrc": true,
+    "**/.eslintignore": true,
+    "**/webpack.config.js": true,
+    "**/.eslintrc.js": true,
+    "**/middle_of_update_package.json.js": true,
+    "**/package.json": true,
+    "**/tsconfig.json": true
   }
 }

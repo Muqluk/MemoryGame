@@ -8,6 +8,7 @@
   min-height: $cardheight+5px;
   min-width:  $cardwidth+5px;
   justify-content: center;
+  align-items: middle;
 }
 .gamecard {
   display: inline-flex;
@@ -52,18 +53,27 @@
 @keyframes hide {
   0% { width: $cardwidth }
   50% {
-    width: 0px;
-    // transform: rotate(180deg);
-    // height: 0px;
+    width: 5px;
+    height: $cardheight*.5;
   }
-  100% { width: $cardwidth }
+  100% {
+    transform: rotate(180deg);
+    width: $cardwidth;
+  }
 }
 @keyframes show {
-  0% { width: $cardwidth }
-  50% {
-    width: 0px;
-    // transform: rotate(-180deg);
-    // height: 0px;
+  0% {
+    width: $cardwidth;
+    opacity: 0;
+    transform: rotate(-180deg);
   }
-  100% { width: $cardwidth }
+  50% {
+    width: 5px;
+    height: $cardheight*.5;
+  }
+  100% {
+    width: $cardwidth;
+    transform: rotate(0);
+    opacity: 1.0;
+  }
 }
