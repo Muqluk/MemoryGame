@@ -19,9 +19,6 @@ import './static/game.scss';
 const GameView = (props) => {
   const { Cards, Config } = props.Game;
   setTimeout(() => {
-    // console.clear();
-    console.log('Game Config: ', Config);
-    console.log('Game props: ', Cards);
   }, 250);
   const newGame = () => {
     console.log('requesting new game');

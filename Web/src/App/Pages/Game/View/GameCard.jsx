@@ -1,9 +1,3 @@
-/*
-  eslint-disable
-    no-console,
-    class-methods-use-this,
-*/
-
 import PropTypes from 'prop-types';
 
 import './static/gamecard.scss';

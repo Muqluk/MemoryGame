@@ -1,7 +1,7 @@
 /*
   eslint-disable
 */
-    // no-console,
+// no-console,
 
 import { GameCard } from './GameCard';
 
@@ -19,26 +19,19 @@ export class GameBoardView extends React.Component {
   getCards = (rowIdx) => {
     const { Layout, Cards } = this.props;
     const cards = [];
-    console.log(Cards);
-    for (let c = 0; c < Layout.cols; c += 1) {
+    for (let c = 0; c < Layout.columns; c += 1) {
       const cardId = `R${rowIdx}C${c}`;
-      const card = (
+      const card = Cards[cardId];
+      const gameCard = (
         <GameCard
-          key={c}
+          key={cardId}
           cardId={cardId}
           cardClicked={this.cardClicked}
-          // icon={}
+          icon={card.icon}
+          isVisible={card.isVisible}
         />
       );
-      this.setState((pState) => {
-        const oldCards = pState.cards;
-        oldCards[cardId] = card;
-        return {
-          cards: oldCards,
-        };
-      });
-
-      cards.push(card);
+      cards.push(gameCard);
     }
     return cards;
   };
@@ -52,7 +45,6 @@ export class GameBoardView extends React.Component {
     return rows;
   };
 
-  // cardClicked = (cardProps) => {
   cardClicked = () => {
     this.setState((pState) => {
       const oCards = pState.cards;
