@@ -11,6 +11,17 @@
     "**/.eslintrc.js": true,
     "**/middle_of_update_package.json.js": true,
     "**/package.json": true,
-    "**/tsconfig.json": true
+    "**/tsconfig.json": true,
+    "**/conf/webpack.common.js": true,
+    "**/conf/webpack.prod.js": true,
+    "**/src/main.jsx": true,
+    "**/src/index.html": true,
+    "**/src/App/AppRoot.jsx": true,
+    "**/src/vscode settings.json": true,
+    "**/src/App/Pages/Home": true,
+    "**/src/App/Pages/Players": true,
+    "**/src/App/Static": true,
+    "**/src/App/Store": true,
+    "**/src/Components": true
   }
 }

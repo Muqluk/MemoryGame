@@ -3,6 +3,7 @@ import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE, connectRouter } from 'connected-react-router';
 
 import { Reducer as HomeReducer } from '../Pages/Home/Model/reducer';
+import { Reducer as GameReducer } from '../Pages/Game/Model/reducer';
 
 const routeInitialState = fromJS({
   location: null,
@@ -25,6 +26,7 @@ export default function createReducer(injectedReducers, history) {
     // router: routeReducer,
     router: connectRouter(history),
     home: HomeReducer,
+    game: GameReducer,
     ...injectedReducers,
   });
 }

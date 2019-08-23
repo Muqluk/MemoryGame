@@ -1,22 +1,11 @@
+/*
+  eslint-disable
+*/
+    // no-console,
+
 import { GameCard } from './GameCard';
 
 import { minionIcons } from '../Model/minionIcons';
-
-
-const boardDimensions = { // in cards
-  height: 5,
-  width: 5,
-};
-
-const getRandomIcon = () => {
-  const rnd = Math.floor(Math.random() * Math.floor(minionIcons.length));
-  const isVisible = Math.floor(Math.random() * Math.floor(2));
-  return {
-    icon: minionIcons[rnd].url,
-    isVisible: isVisible ? true : false, // eslint-disable-line
-  };
-};
-
 
 export class GameBoardView extends React.Component {
   constructor(props) {
@@ -27,21 +16,18 @@ export class GameBoardView extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.generateRows();
-  }
-
-  // temporary function - this should be being supplied by the reducer and app state.
   getCards = (rowIdx) => {
+    const { Layout, Cards } = this.props;
     const cards = [];
-    for (let i = 0; i < boardDimensions.width; i += 1) {
-      const cardId = `R${rowIdx}C${i}`;
+    console.log(Cards);
+    for (let c = 0; c < Layout.cols; c += 1) {
+      const cardId = `R${rowIdx}C${c}`;
       const card = (
         <GameCard
-          key={i}
+          key={c}
           cardId={cardId}
           cardClicked={this.cardClicked}
-          {...getRandomIcon()}
+          // icon={}
         />
       );
       this.setState((pState) => {
@@ -58,14 +44,16 @@ export class GameBoardView extends React.Component {
   };
 
   generateRows = () => {
+    const { Layout, Cards } = this.props;
     const rows = [];
-    for (let i = 0; i < boardDimensions.height; i += 1) {
-      rows.push(<div key={i} className="cardrow">{this.getCards(i)}</div>);
+    for (let r = 0; r < Layout.rows; r += 1) {
+      rows.push(<div key={r} className="cardrow">{this.getCards(r)}</div>);
     }
-    this.setState({ rows });
+    return rows;
   };
 
-  cardClicked = (cardProps) => {
+  // cardClicked = (cardProps) => {
+  cardClicked = () => {
     this.setState((pState) => {
       const oCards = pState.cards;
       return {
@@ -75,11 +63,13 @@ export class GameBoardView extends React.Component {
   };
 
   render() {
-    // setTimeout(() => console.clear(), 150); // eslint-disable-line
     return (
       <div className="content">
-        <div className="throwaway2 panel-flowControl">control</div>
-        <div className="throwaway3 panel-board">{this.state.rows}</div>
+        <div className="throwaway2 panel-flowControl">
+          <div>[GameBoard Controls]</div>
+          <div>&nbsp;&nbsp;&nbsp;[sub menu]</div>
+        </div>
+        <div className="panel-board">{this.generateRows()}</div>
       </div>
     );
   }

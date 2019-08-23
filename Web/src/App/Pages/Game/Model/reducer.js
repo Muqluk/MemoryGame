@@ -6,16 +6,13 @@ import { Actions } from './actions';
 import { initialState } from './initialState';
 
 export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
+  console.log(type);
   switch (type) {
-    case Actions.AddPlayer: {
+    case Actions.NEW_GAME: {
       let newState = state;
-      console.log('Adding Player!', payload);
-      newState = newState.set('Players', payload);
+      console.log('New Game Requested', payload);
+      newState = newState.set('Cards', []);
       return newState;
-    }
-    case Actions.RemovePlayer: {
-      console.log('removing player!', payload);
-      return state;
     }
     default:
       return state;
