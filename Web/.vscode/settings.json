@@ -4,8 +4,6 @@
     "**/LICENSE": true,
     "**/package-lock.json": true,
     "**/__tests__": true,
-    "**/.vscode": true,
-    "**/conf": true,
     "**/node_modules": true,
     "**/.babelrc": true,
     "**/.eslintignore": true,
