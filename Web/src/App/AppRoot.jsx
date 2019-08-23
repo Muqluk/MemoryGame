@@ -29,23 +29,21 @@ const NavArr = [
     path: '/',
     component: Home,
   },
-  {
-    name: 'Players Admin',
-    path: '/Players',
-    component: Players,
-    isHidden: true,
-  },
+  // {
+  //   name: 'Players Admin',
+  //   path: '/Players',
+  //   component: Players
+  // },
   {
     name: 'Game',
     path: '/Game',
     component: Game,
   },
-  {
-    name: 'ComponentTest',
-    path: '/ComponentTest',
-    component: ComponentTest,
-    isHidden: true,
-  },
+  // {
+  //   name: 'ComponentTest',
+  //   path: '/ComponentTest',
+  //   component: ComponentTest,
+  // },
 ];
 
 class AppRootComponent extends React.Component {

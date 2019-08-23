@@ -16,7 +16,7 @@ import * as action from '../Model/actions';
 
 const HomeView = (props) => (
   <div>
-    <div>I am home page!</div>
+    <div>Hi!  click on <u><b>Game</b></u> above!</div> {/* eslint-disable-line */}
   </div>
 );
 
