@@ -27,12 +27,13 @@ const NavArr = [
   {
     name: 'Home',
     path: '/',
-    component: Home
+    component: Home,
   },
   {
     name: 'Players Admin',
     path: '/Players',
-    component: Players
+    component: Players,
+    isHidden: true,
   },
   {
     name: 'Game',
@@ -43,6 +44,7 @@ const NavArr = [
     name: 'ComponentTest',
     path: '/ComponentTest',
     component: ComponentTest,
+    isHidden: true,
   },
 ];
 
@@ -51,11 +53,11 @@ class AppRootComponent extends React.Component {
     return (
       <div className="app">
         <BrowserRouter>
-          <Navigation.TopMenu locations={NavArr} />
+          <Navigation.TopMenu locations={NavArr.filter((nav) => !nav.isHidden)} />
           <Switch>
-            {NavArr.map((nav) => (<Route key={nav.path} exact {...nav} />))}
-            <Route exact path="/" name="Home" component={Home} />
-            <Route exact path="/Players" name="Players Admin" component={Players} />
+            {NavArr
+              .filter((nav) => !nav.isHidden)
+              .map((nav) => (<Route key={nav.path} exact {...nav} />))}
           </Switch>
         </BrowserRouter>
       </div>

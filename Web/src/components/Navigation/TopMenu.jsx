@@ -9,7 +9,9 @@ export const TopMenu = (props) => (
   <div className="navigation top__nav">
     <ul>
       {props.locations && Array.isArray(props.locations)
-        ? props.locations.map((location) => <Location key={location.path} {...location} />)
+        ? props.locations
+          .filter((nav) => !nav.isHidden)
+          .map((location) => <Location key={location.path} {...location} />)
         : <Location path="/" name="Home" />}
     </ul>
   </div>
