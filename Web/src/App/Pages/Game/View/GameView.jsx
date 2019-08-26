@@ -17,7 +17,8 @@ import { Actions } from '../Model/actions';
 import './static/game.scss';
 
 const GameView = (props) => {
-  const { Cards, Config } = props.Game;
+  const { cardClicked, Game } = props;
+  const { Cards, Config } = Game;
   setTimeout(() => {
   }, 250);
   const newGame = () => {
@@ -33,7 +34,7 @@ const GameView = (props) => {
           <li onClick={newGame}>End Game</li>
         </ul>
       </div>
-      <GameBoardView Layout={Config.Dimensions} Cards={Cards} />
+      <GameBoardView Layout={Config.Dimensions} Cards={Cards} cardClicked={props.cardClicked} />
     </div>
   );
 };
@@ -44,9 +45,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   newGame: () => dispatch(Actions.NewGame()),
-  // fetchAction: opts => dispatch(action.fetchProducts(opts)),
-  // changeGridStateAction: opts => dispatch(action.setGridState(opts)),
-  // requestCsvExportAction: opts => dispatch(action.requestCsvExport(opts)),
+  cardClicked: (card) => dispatch(Actions.CardClicked(card)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

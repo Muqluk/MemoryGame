@@ -60,6 +60,7 @@ const prepState = () => {
   const returning = {
     Game: {
       Config,
+      selectedCount: 0,
       CurrentPlayer: 0,
       Players: [],
       Cards,

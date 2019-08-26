@@ -1,23 +1,16 @@
 /*
   eslint-disable
+    no-console,
+    no-unused-vars,
+    react/no-unused-state,
 */
-// no-console,
-
 import { GameCard } from './GameCard';
-
 import { minionIcons } from '../Model/minionIcons';
 
-export class GameBoardView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rows: [],
-      cards: [],
-    };
-  }
-
-  getCards = (rowIdx) => {
-    const { Layout, Cards } = this.props;
+export const GameBoardView = (props) => {
+  console.log('props', props);
+  const getCards = (rowIdx) => {
+    const { Layout, Cards } = props;
     const cards = [];
     for (let c = 0; c < Layout.columns; c += 1) {
       const cardId = `R${rowIdx}C${c}`;
@@ -26,7 +19,7 @@ export class GameBoardView extends React.Component {
         <GameCard
           key={cardId}
           cardId={cardId}
-          cardClicked={this.cardClicked}
+          cardClicked={cardClicked}
           icon={card.icon}
           isVisible={card.isVisible}
         />
@@ -36,33 +29,25 @@ export class GameBoardView extends React.Component {
     return cards;
   };
 
-  generateRows = () => {
-    const { Layout, Cards } = this.props;
+  const generateRows = () => {
+    const { Layout, Cards } = props;
     const rows = [];
     for (let r = 0; r < Layout.rows; r += 1) {
-      rows.push(<div key={r} className="cardrow">{this.getCards(r)}</div>);
+      rows.push(<div key={r} className="cardrow">{getCards(r)}</div>);
     }
     return rows;
   };
 
-  cardClicked = () => {
-    this.setState((pState) => {
-      const oCards = pState.cards;
-      return {
-        cards: oCards,
-      };
-    });
+  const cardClicked = (cardProps) => {
+    props.cardClicked(cardProps);
   };
-
-  render() {
-    return (
-      <div className="content">
-        <div className="throwaway2 panel-flowControl">
-          <div>[GameBoard Controls]</div>
-          <div>&nbsp;&nbsp;&nbsp;[sub menu]</div>
-        </div>
-        <div className="panel-board">{this.generateRows()}</div>
+  return (
+    <div className="content">
+      <div className="panel-flowControl">
+        {/* <div>[GameBoard Controls]</div>
+          <div>&nbsp;&nbsp;&nbsp;[sub menu]</div> */}
       </div>
-    );
-  }
+      <div className="panel-board">{generateRows()}</div>
+    </div>
+  );
 }

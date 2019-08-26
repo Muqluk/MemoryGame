@@ -1,44 +1,28 @@
-import { all, call, put, select, takeLatest } from 'redux-saga/effects'; // eslint-disable-line
+/*
+  eslint-disable
+    no-unused-vars,
+    no-console,
+    require-yield,
+*/
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 
 import * as selector from './selectors';
-import * as actions from '../Model/actions';
+import { Actions } from '../Model/actions';
 import { Constants } from '../Model/constants';
 
-// function* watchNewGameAsync() {
-//   try {
-//     // const products = yield select(selector.makeSelectProducts());
-//     // const response = yield call(
-//     // api.gridApiRequest,
-//     // products.apiRequestParams
-//     // );
-//     // yield put(actions.NewGame());
-//   } catch (ex) {
-//     // yield put(action.fetchProductsFailed(ex));
-//   }
-// }
+console.log(Actions);
+
+function* cardClickedAsync(props) {
+  console.log('in saga', props);
+  yield put(Actions.AdvanceTurn());
+}
+
+function* watchCardClickedAsync() {
+  yield takeLatest(Actions.CardClicked, cardClickedAsync);
+}
 
 export default function* gamePageSaga() {
   yield all([
-    // watchNewGameAsync(),
+    watchCardClickedAsync(),
   ]);
 }
-
-/*
-  function* fetchPlayers() {
-   try {
-     const products = yield select(selector.makeSelectProducts());
-     const response = yield call(
-       api.gridApiRequest,
-       products.apiRequestParams
-     );
-     yield put(action.fetchProductsSucceeded(response));
-     yield put(action.);
-   } catch (ex) {
-     yield put(action.fetchProductsFailed(ex));
-   }
-  }
-
-  function* watchFetchProductsAsync() {
-    yield takeLatest(constant.PRODUCTS_SEARCH_FETCH, fetchProductsAsync);
-  }
-*/

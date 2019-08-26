@@ -1,17 +1,42 @@
 /*
   eslint-disable
     no-console,
+    function-paren-newline,
 */
-import { Actions } from './actions';
+import { fromJS } from 'immutable';
 import { initialState } from './initialState';
+import { Constants } from './constants';
+
+
+const { GameAction } = Constants;
 
 export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
-  console.log(type);
+  let newState = state;
   switch (type) {
-    case Actions.NEW_GAME: {
-      let newState = state;
-      console.log('New Game Requested', payload);
+    case GameAction.NEW_GAME: {
       newState = newState.set('Cards', []);
+      return newState;
+    }
+    case GameAction.CARD_CLICKED: {
+      console.log('in reducer');
+      const card = newState
+        .get('Game')
+        .get('Cards')
+        .get(payload)
+        .toJS();
+
+      const newCard = fromJS({
+        ...card,
+        isVisible: !card.isVisible,
+      });
+
+      newState = newState.setIn(['Game', 'Cards', payload], newCard);
+
+      console.log('leaving reducer');
+      return newState;
+    }
+    case GameAction.ADVANCE_PLAYER_TURN: {
+      console.log('advancing Player Turn');
       return newState;
     }
     default:

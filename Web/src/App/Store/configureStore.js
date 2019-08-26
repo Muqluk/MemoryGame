@@ -4,6 +4,8 @@ import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 
+import gamePageSaga from '../Pages/Game/ViewModel/saga';
+
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore(initialState = {}, history) {
@@ -33,6 +35,7 @@ export default function configureStore(initialState = {}, history) {
   store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry
+  store.asyncSagas = {};
 
   store.injectReducer = (key, asyncReducer) => {
     store.asyncReducers[key] = asyncReducer;
@@ -42,6 +45,9 @@ export default function configureStore(initialState = {}, history) {
   store.injectSaga = (key, asyncSaga) => {
     store.asyncSagas[key] = asyncSaga;
   };
+
+  store.injectSaga('Game', gamePageSaga);
+  store.runSaga(gamePageSaga);
 
   if (module.hot) {
     module.hot.accept('./reducers', () => {
