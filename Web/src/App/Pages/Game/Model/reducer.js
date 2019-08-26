@@ -39,6 +39,14 @@ export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
       console.log('advancing Player Turn');
       return newState;
     }
+    case GameAction.ADVANCE_PLAYER_TURN_SUCCESS: {
+      console.log('reducer ADVANCE_PLAYER_TURN_SUCCESS');
+      return newState;
+    }
+    case GameAction.ADVANCE_PLAYER_TURN_FAILED: {
+      console.log('reducer ADVANCE_PLAYER_TURN_FAILED');
+      return newState;
+    }
     default:
       return state;
   }

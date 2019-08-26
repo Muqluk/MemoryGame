@@ -50,4 +50,4 @@ export const GameBoardView = (props) => {
       <div className="panel-board">{generateRows()}</div>
     </div>
   );
-}
+};

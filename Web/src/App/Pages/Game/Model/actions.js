@@ -11,4 +11,10 @@ export const Actions = {
   AdvanceTurn: () => ({
     type: Constants.GameAction.ADVANCE_PLAYER_TURN,
   }),
+  AdvanceTurnComplete: () => ({
+    type: Constants.GameAction.ADVANCE_PLAYER_TURN_SUCCESS
+  }),
+  AdvanceTurnFailed: () => ({
+    type: Constants.GameAction.ADVANCE_PLAYER_TURN_FAILED
+  }),
 };
