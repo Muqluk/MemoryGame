@@ -11,18 +11,12 @@ import * as selector from './selectors';
 import { Actions } from '../Model/actions';
 import { Constants } from '../Model/constants';
 
-console.log(Actions);
-
 function* cardClickedAsync(opt) {
-  console.log('in cardClickedAsync', opt);
-  debugger;
   yield put(Actions.AdvanceTurn());
 }
 
 function* advanceTurnAsync(opt) {
-  console.log('in advanceTurnAsync', opt);
   try {
-    debugger;
     yield put(Actions.AdvanceTurnComplete(opt));
   } catch (ex) {
     yield put(Actions.AdvanceTurnFailed(ex));
@@ -30,11 +24,11 @@ function* advanceTurnAsync(opt) {
 }
 
 function* watchCardClickedAsync() {
-  yield takeLatest(Actions.CardClicked, cardClickedAsync);
+  yield takeLatest(Constants.GameAction.CARD_CLICKED, cardClickedAsync);
 }
 
 function* watchAdvanceTurnAsync() {
-  // yield takeLatest(Actions.AdvanceTurn, advanceTurnAsync);
+  yield takeLatest(Constants.GameAction.ADVANCE_PLAYER_TURN, advanceTurnAsync);
 }
 
 export default function* gamePageSaga() {
