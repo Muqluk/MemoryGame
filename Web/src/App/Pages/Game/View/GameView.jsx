@@ -9,15 +9,13 @@ import { compose } from 'redux';
 
 import { GameBoardView } from './GameBoardView';
 
-import * as selector from '../ViewModel/selectors';
+import GameSelectors from '../ViewModel/selectors';
 import { Actions } from '../Model/actions';
 
 import './static/game.scss';
 
 const GameView = (props) => {
-  const { cardClicked, Game } = props;
-  const { Cards, Config } = Game;
-
+  const { cardClicked, Cards, Config, CurrentGame } = props;
   const newGame = () => props.newGame();
 
   return (
@@ -28,13 +26,20 @@ const GameView = (props) => {
           <li onClick={newGame}>End Game</li>
         </ul>
       </div>
-      <GameBoardView Layout={Config.Dimensions} Cards={Cards} cardClicked={cardClicked} />
+      <GameBoardView
+        Layout={Config.Dimensions}
+        Cards={Cards}
+        cardClicked={cardClicked}
+        CurrentGame={CurrentGame}
+      />
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  Game: selector.GameSelector(),
+  Cards: GameSelectors.GameCards(),
+  Config: GameSelectors.GameConfig(),
+  CurrentGame: GameSelectors.CurrentGame(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

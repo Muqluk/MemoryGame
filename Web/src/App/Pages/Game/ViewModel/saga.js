@@ -7,20 +7,54 @@
 */
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
 
-import * as selector from './selectors';
+import GameSelectors from './selectors';
 import { Actions } from '../Model/actions';
 import { Constants } from '../Model/constants';
 
 function* cardClickedAsync(opt) {
-  yield put(Actions.AdvanceTurn());
+  try {
+    console.clear();
+    const currentCard = opt.payload;
+    const currentGame = yield select(GameSelectors.CurrentGame());
+    const { currentPlayer, flipCount, Players, SelectionHistory, turnsCounter } = currentGame;
+    const newState = {};
+
+    console.log('SelectionHistory', SelectionHistory);
+    const latestTurn = SelectionHistory[turnsCounter - 1] || [];
+    console.log('latest turn: ', latestTurn);
+    const thisTurn = SelectionHistory[turnsCounter] || {
+      player: Players[currentPlayer],
+      selections: [],
+    };
+
+    thisTurn.selections.push(currentCard);
+
+
+    console.log(currentPlayer);
+    if (flipCount >= 1) {
+      newState.flipCount = 0;
+      newState.currentPlayer = (currentPlayer === Players.length - 1)
+        ? 0
+        : currentPlayer + 1;
+      newState.turnsCounter = turnsCounter + 1;
+      // TODO:  ok now pause x seconds and flip the un-matched cards back to face down.
+    } else {
+      newState.flipCount = flipCount + 1;
+    }
+
+    console.log('this turn:', thisTurn);
+
+    newState.turn = thisTurn;
+
+    yield put(Actions.AdvanceTurn(newState));
+  } catch (ex) {
+    console.log('ex', ex);
+    yield put(Actions.AdvanceTurnFailed(ex));
+  }
 }
 
 function* advanceTurnAsync(opt) {
-  try {
-    yield put(Actions.AdvanceTurnComplete(opt));
-  } catch (ex) {
-    yield put(Actions.AdvanceTurnFailed(ex));
-  }
+  yield put(Actions.AdvanceTurnComplete());
 }
 
 function* watchCardClickedAsync() {

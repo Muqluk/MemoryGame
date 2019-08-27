@@ -8,8 +8,9 @@ export const Actions = {
     type: Constants.GameAction.CARD_CLICKED,
     payload: card.cardId,
   }),
-  AdvanceTurn: () => ({
+  AdvanceTurn: (gameState) => ({
     type: Constants.GameAction.ADVANCE_PLAYER_TURN,
+    payload: gameState,
   }),
   AdvanceTurnComplete: () => ({
     type: Constants.GameAction.ADVANCE_PLAYER_TURN_SUCCESS

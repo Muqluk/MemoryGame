@@ -25,8 +25,8 @@ export default function createReducer(injectedReducers, history) {
   return combineReducers({
     // router: routeReducer,
     router: connectRouter(history),
-    home: HomeReducer,
-    game: GameReducer,
+    Home: HomeReducer,
+    Game: GameReducer,
     ...injectedReducers,
   });
 }

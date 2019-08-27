@@ -1,6 +1,8 @@
 import { GameCard } from './GameCard';
 
 export const GameBoardView = (props) => {
+  const { CurrentGame } = props;
+  console.log('props', props);
   const getCards = (rowIdx) => {
     const { Layout, Cards } = props;
     const cards = [];
@@ -38,9 +40,17 @@ export const GameBoardView = (props) => {
 
   return (
     <div className="content">
-      <div className="panel-flowControl">
-        {/* <div>[GameBoard Controls]</div>
-          <div>&nbsp;&nbsp;&nbsp;[sub menu]</div> */}
+      <div className="flowControl__container">
+        <div className="flowControl__menu">
+          <div>
+            Player:&nbsp;&nbsp;
+            {CurrentGame.Players[CurrentGame.currentPlayer].Name}
+          </div>
+          <div>
+            Flipped:&nbsp;&nbsp;
+            {CurrentGame.flipCount}
+          </div>
+        </div>
       </div>
       <div className="panel-board">{generateRows()}</div>
     </div>
