@@ -18,7 +18,6 @@ export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
       return newState;
     }
     case GameAction.CARD_CLICKED: {
-      console.log('in reducer');
       const card = newState
         .get('Game')
         .get('Cards')
@@ -32,19 +31,15 @@ export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
 
       newState = newState.setIn(['Game', 'Cards', payload], newCard);
 
-      console.log('leaving reducer');
       return newState;
     }
     case GameAction.ADVANCE_PLAYER_TURN: {
-      console.log('advancing Player Turn');
       return newState;
     }
     case GameAction.ADVANCE_PLAYER_TURN_SUCCESS: {
-      console.log('reducer ADVANCE_PLAYER_TURN_SUCCESS');
       return newState;
     }
     case GameAction.ADVANCE_PLAYER_TURN_FAILED: {
-      console.log('reducer ADVANCE_PLAYER_TURN_FAILED');
       return newState;
     }
     default:

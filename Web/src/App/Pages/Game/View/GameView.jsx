@@ -1,7 +1,5 @@
 /*
   eslint-disable
-    no-console,
-    no-unused-vars,
     jsx-a11y/no-noninteractive-element-interactions,
 */
 import React from 'react';
@@ -19,12 +17,8 @@ import './static/game.scss';
 const GameView = (props) => {
   const { cardClicked, Game } = props;
   const { Cards, Config } = Game;
-  setTimeout(() => {
-  }, 250);
-  const newGame = () => {
-    console.log('requesting new game');
-    props.newGame();
-  };
+
+  const newGame = () => props.newGame();
 
   return (
     <div className="game">
@@ -34,7 +28,7 @@ const GameView = (props) => {
           <li onClick={newGame}>End Game</li>
         </ul>
       </div>
-      <GameBoardView Layout={Config.Dimensions} Cards={Cards} cardClicked={props.cardClicked} />
+      <GameBoardView Layout={Config.Dimensions} Cards={Cards} cardClicked={cardClicked} />
     </div>
   );
 };
@@ -49,10 +43,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-/*
-  const withReducer = injectReducer({ key: 'productsPage', reducer });
-  const withSaga = injectSaga({ key: 'productsPage', saga });
-*/
+
 export const Game = compose(
   withConnect,
 )(GameView);

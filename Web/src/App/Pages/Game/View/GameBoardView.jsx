@@ -1,20 +1,14 @@
-/*
-  eslint-disable
-    no-console,
-    no-unused-vars,
-    react/no-unused-state,
-*/
 import { GameCard } from './GameCard';
-import { minionIcons } from '../Model/minionIcons';
 
 export const GameBoardView = (props) => {
-  console.log('props', props);
   const getCards = (rowIdx) => {
     const { Layout, Cards } = props;
     const cards = [];
+
     for (let c = 0; c < Layout.columns; c += 1) {
       const cardId = `R${rowIdx}C${c}`;
       const card = Cards[cardId];
+
       const gameCard = (
         <GameCard
           key={cardId}
@@ -30,7 +24,7 @@ export const GameBoardView = (props) => {
   };
 
   const generateRows = () => {
-    const { Layout, Cards } = props;
+    const { Layout } = props;
     const rows = [];
     for (let r = 0; r < Layout.rows; r += 1) {
       rows.push(<div key={r} className="cardrow">{getCards(r)}</div>);
@@ -41,6 +35,7 @@ export const GameBoardView = (props) => {
   const cardClicked = (cardProps) => {
     props.cardClicked(cardProps);
   };
+
   return (
     <div className="content">
       <div className="panel-flowControl">
