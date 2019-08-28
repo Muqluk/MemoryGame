@@ -15,7 +15,9 @@ const getCards = () => {
       col: 0,
       cardId: 'R0C0',
       icon: '',
-      isVisible: false,
+      isVisible: true,
+      isLocked: false,
+      isMatched: false,
       ...opts
     };
     const card = {
@@ -23,7 +25,7 @@ const getCards = () => {
       col: cardOpts.col || 0,
       cardId: `R${cardOpts.row || 0}C${cardOpts.col || 0}`,
       icon: cardOpts.icon || '',
-      isVisible: false,
+      isVisible: true,
     };
     cards[`R${cardOpts.row || 0}C${cardOpts.col || 0}`] = card;
   };

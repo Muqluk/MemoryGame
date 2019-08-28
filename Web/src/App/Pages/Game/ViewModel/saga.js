@@ -13,15 +13,11 @@ import { Constants } from '../Model/constants';
 
 function* cardClickedAsync(opt) {
   try {
-    console.clear();
+    const newState = {};
     const currentCard = opt.payload;
     const currentGame = yield select(GameSelectors.CurrentGame());
     const { currentPlayer, flipCount, Players, SelectionHistory, turnsCounter } = currentGame;
-    const newState = {};
-
-    console.log('SelectionHistory', SelectionHistory);
     const latestTurn = SelectionHistory[turnsCounter - 1] || [];
-    console.log('latest turn: ', latestTurn);
     const thisTurn = SelectionHistory[turnsCounter] || {
       player: Players[currentPlayer],
       selections: [],
@@ -29,21 +25,17 @@ function* cardClickedAsync(opt) {
 
     thisTurn.selections.push(currentCard);
 
-
-    console.log(currentPlayer);
     if (flipCount >= 1) {
       newState.flipCount = 0;
       newState.currentPlayer = (currentPlayer === Players.length - 1)
         ? 0
         : currentPlayer + 1;
       newState.turnsCounter = turnsCounter + 1;
+
       // TODO:  ok now pause x seconds and flip the un-matched cards back to face down.
     } else {
       newState.flipCount = flipCount + 1;
     }
-
-    console.log('this turn:', thisTurn);
-
     newState.turn = thisTurn;
 
     yield put(Actions.AdvanceTurn(newState));
@@ -61,13 +53,13 @@ function* watchCardClickedAsync() {
   yield takeLatest(Constants.GameAction.CARD_CLICKED, cardClickedAsync);
 }
 
-function* watchAdvanceTurnAsync() {
-  yield takeLatest(Constants.GameAction.ADVANCE_PLAYER_TURN, advanceTurnAsync);
-}
+// function* watchAdvanceTurnAsync() {
+//   yield takeLatest(Constants.GameAction.ADVANCE_PLAYER_TURN, advanceTurnAsync);
+// }
 
 export default function* gamePageSaga() {
   yield all([
     watchCardClickedAsync(),
-    watchAdvanceTurnAsync(),
+    // watchAdvanceTurnAsync(),
   ]);
 }

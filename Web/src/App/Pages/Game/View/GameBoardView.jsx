@@ -2,7 +2,7 @@ import { GameCard } from './GameCard';
 
 export const GameBoardView = (props) => {
   const { CurrentGame } = props;
-  console.log('props', props);
+
   const getCards = (rowIdx) => {
     const { Layout, Cards } = props;
     const cards = [];
