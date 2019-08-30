@@ -15,8 +15,14 @@ import { Actions } from '../Model/actions';
 import './static/game.scss';
 
 const GameView = (props) => {
-  const { cardClicked, Cards, Config, CurrentGame } = props;
+  const { handleCardClick, Cards, Config, CurrentGame } = props;
   const newGame = () => props.newGame();
+
+  const cardClicked = (card) => {
+    if (!props.CurrentGame.lockAll) {
+      handleCardClick(card);
+    }
+  };
 
   return (
     <div className="game">
@@ -44,7 +50,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   newGame: () => dispatch(Actions.NewGame()),
-  cardClicked: (card) => dispatch(Actions.CardClicked(card)),
+  handleCardClick: (card) => dispatch(Actions.CardClicked(card)),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

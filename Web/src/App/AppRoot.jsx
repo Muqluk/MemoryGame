@@ -48,6 +48,10 @@ const NavArr = [
 
 class AppRootComponent extends React.Component {
   render() {
+    setTimeout(
+      () => console.clear(), // eslint-disable-line
+      250
+    );
     return (
       <div className="app">
         <BrowserRouter>

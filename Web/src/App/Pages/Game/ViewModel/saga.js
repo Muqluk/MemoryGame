@@ -1,46 +1,34 @@
-/*
-  eslint-disable
-    no-unused-vars,
-    no-console,
-    require-yield,
-    no-debugger,
-*/
-import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+// import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
+import { all, delay, put, select, takeLatest } from 'redux-saga/effects';
 
 import GameSelectors from './selectors';
 import { Actions } from '../Model/actions';
 import { Constants } from '../Model/constants';
 
-function* cardClickedAsync(opt) {
+function* cardClickedAsync() {
   try {
-    console.log('saga click', opt);
-    const currentGame = yield select(GameSelectors.CurrentGame());
-    if (currentGame.flipCount === 0) {
+    const { flipCount } = yield select(GameSelectors.CurrentGame());
+    const { postTurnDelay } = yield select(GameSelectors.GameConfig());
+    if (flipCount === 0) {
       yield put(Actions.AdvanceTurn());
+    } else if (flipCount === 1) {
+      yield put(Actions.AdvanceTurnComplete());
+      yield delay(postTurnDelay);
+      yield put(Actions.HideCards());
     } else {
-      yield put(Actions.AdvanceTurnSuccess());
+      yield put(Actions.AdvanceTurnFailed({ message: 'flipCount out of bounds' }));
     }
   } catch (ex) {
-    console.log('ex', ex);
     yield put(Actions.AdvanceTurnFailed(ex));
   }
-}
-
-function* advanceTurnAsync(opt) {
-  yield put(Actions.AdvanceTurnComplete());
 }
 
 function* watchCardClickedAsync() {
   yield takeLatest(Constants.GameAction.CARD_CLICKED, cardClickedAsync);
 }
 
-// function* watchAdvanceTurnAsync() {
-//   yield takeLatest(Constants.GameAction.ADVANCE_PLAYER_TURN, advanceTurnAsync);
-// }
-
 export default function* gamePageSaga() {
   yield all([
     watchCardClickedAsync(),
-    // watchAdvanceTurnAsync(),
   ]);
 }

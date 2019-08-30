@@ -8,16 +8,28 @@ export const GameBoardView = (props) => {
     const cards = [];
 
     for (let c = 0; c < Layout.columns; c += 1) {
-      const cardId = `R${rowIdx}C${c}`;
-      const card = Cards[cardId];
+      const cId = `R${rowIdx}C${c}`;
+      const card = Cards[cId];
+      const { isVisible, cardId, icon } = card;
+
+      const imageStyle = isVisible
+        ? { backgroundImage: `url(${icon}` }
+        : {};
+      const iconClass = !isVisible
+        ? 'card hiddencard'
+        : 'card';
+      const cardClass = !isVisible
+        ? 'gamecard hide'
+        : 'gamecard show';
 
       const gameCard = (
         <GameCard
           key={cardId}
           cardId={cardId}
           cardClicked={cardClicked}
-          icon={card.icon}
-          isVisible={card.isVisible}
+          icon={icon}
+          isVisible={isVisible}
+          {...{ imageStyle, iconClass, cardClass }}
         />
       );
       cards.push(gameCard);
