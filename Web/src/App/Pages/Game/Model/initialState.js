@@ -76,7 +76,7 @@ const prepState = () => {
             Name: 'Jacque',
           },
         ],
-        SelectionHistory: {},
+        TurnHistory: [],
         turnsCounter: 0,
       },
       HasError: false,

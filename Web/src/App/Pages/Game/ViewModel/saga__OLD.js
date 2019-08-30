@@ -13,13 +13,39 @@ import { Constants } from '../Model/constants';
 
 function* cardClickedAsync(opt) {
   try {
-    console.log('saga click', opt);
+    const newState = {};
+    const currentCard = opt.payload;
     const currentGame = yield select(GameSelectors.CurrentGame());
-    if (currentGame.flipCount === 0) {
-      yield put(Actions.AdvanceTurn());
+    const {
+      currentPlayer,
+      flipCount,
+      Players,
+      TurnHistory,
+      turnsCounter,
+    } = currentGame;
+    const latestTurn = TurnHistory[turnsCounter - 1] || [];
+    const thisTurn = TurnHistory[turnsCounter] || {
+      player: Players[currentPlayer],
+      selections: [],
+    };
+
+    thisTurn.selections.push(currentCard);
+
+    newState.currentPlayer = (currentPlayer === Players.length - 1)
+      ? 0
+      : currentPlayer + 1;
+
+    if (flipCount >= 1) {
+      newState.flipCount = 0;
+      newState.turnsCounter = turnsCounter + 1;
+      // TODO:  ok now pause x seconds and flip the un-matched cards back to face down.
     } else {
-      yield put(Actions.AdvanceTurnSuccess());
+      newState.flipCount = flipCount + 1;
+      newState.turnsCounter = turnsCounter;
     }
+    newState.turn = thisTurn;
+
+    yield put(Actions.AdvanceTurn(newState));
   } catch (ex) {
     console.log('ex', ex);
     yield put(Actions.AdvanceTurnFailed(ex));

@@ -14,12 +14,11 @@ const { GameAction } = Constants;
 const common = {
   card: {
     get: (state, id) => (state.getIn(['Game', 'CurrentGame', 'Cards', id]).toJS()),
-    update: (state, card) => (state.setIn(['Game', 'CurrentGame', 'Cards', card.cardId], fromJS(card))),
+    update: (state, card) => (state.setIn(['Game', 'Cards', card.id], card)),
   },
   current: {
     get: (state) => (state.get('Game').get('CurrentGame').toJS()),
     history: {
-      get: () => ({}),
       update: (state, turnAction) => {
         let newState = state;
         const {
@@ -41,18 +40,8 @@ const common = {
   }
 }
 
-const doLog = (state, payload, type) => {
-  console.group(`${type}`);
-  // console.log('CurrentGame', state.toJS().Game.CurrentGame);
-  console.log('type', type);
-  console.log('payload', payload);
-  console.groupEnd();
-  console.log();
-};
-
 export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
   let newState = state;
-  doLog(state, payload, type);
   switch (type) {
     case GameAction.NEW_GAME: {
       newState = newState.set('Cards', []);
@@ -60,11 +49,9 @@ export const Reducer = (state = initialState, { payload = {}, type = {} }) => {
     }
     case GameAction.CARD_CLICKED: {
       const card = common.card.get(newState, payload);
-      const flipCount = newState.getIn(['Game', 'CurrentGame', 'flipCount']);
       const newCard = {
         ...card,
         isVisible: !card.isVisible,
-        isLocked: card.isVisible && flipCount,
       };
       newState = common.card.update(newState, newCard);
       return newState;
