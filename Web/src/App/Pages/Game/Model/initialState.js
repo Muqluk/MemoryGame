@@ -6,7 +6,6 @@ import { fromJS } from 'immutable';
 import { minionIcons as icons } from './minionIcons';
 
 const Decks = { Minions: 'Minions' };
-
 const getCards = () => {
   const cards = {};
   const Card = (opts) => {
@@ -50,43 +49,38 @@ const getCards = () => {
   return cards;
 };
 
-const prepState = () => {
-  const Cards = getCards();
-  const Config = {
-    Deck: Decks.Minions,
-    Dimensions: {
-      rows: 4,
-      columns: 4,
-    },
-    postTurnDelay: 2500,
-  };
-  const returning = {
-    Game: {
-      Config,
-      CurrentGame: {
-        Cards,
-        currentPlayer: 0,
-        flipCount: 0,
-        Players: [
-          {
-            id: 154,
-            Name: 'Jeremy',
-          },
-          {
-            id: 241,
-            Name: 'Jacque',
-          },
-        ],
-        TurnHistory: [],
-        turnsCounter: 0,
+
+const initialState = fromJS({
+  Game: {
+    Config: {
+      Deck: Decks.Minions,
+      Dimensions: {
+        rows: 4,
+        columns: 4,
       },
-      HasError: false,
-      Errors: [],
-      lockAll: 0,
+      postTurnDelay: 2500,
     },
-  };
-  return returning;
-};
-const initialState = fromJS(prepState());
+    CurrentGame: {
+      Cards: getCards(),
+      currentPlayer: 0,
+      flipCount: 0,
+      Players: [
+        {
+          id: 154,
+          Name: 'Jeremy',
+        },
+        {
+          id: 241,
+          Name: 'Jacque',
+        },
+      ],
+      TurnHistory: [],
+      turnsCounter: 0,
+    },
+    HasError: false,
+    Errors: [],
+    lockAll: 0,
+  },
+});
 
 export { initialState };
