@@ -24,25 +24,23 @@ module.exports = {
       'prop-types',
     ],
     alias: {
-      Routes: 'Routes',
-      Content: 'StaticContent',
-      Layout: 'Layout',
-      Components: 'Components',
-      css: 'StaticContent',
-      State: 'State'
+      Components: 'App/Components',
+      css: 'App/Static',
+      Pages: 'App/Pages',
+      Store: 'App/Store',
     }
   },
   module: {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(js|es6|jsx|ts|tsx)$/,
+        test: /\.(js|es6|jsx)$/,
         exclude: /node_modules/,
         loader: 'eslint-loader'
       },
       {
         enforce: 'pre',
-        test: /\.(js|es6|jsx|ts|tsx)$/,
+        test: /\.(js|es6|jsx)$/,
         loader: 'source-map-loader'
       },
       {
@@ -61,15 +59,6 @@ module.exports = {
           'css-loader', // translates CSS into CommonJS
           'sass-loader' // compiles Sass to CSS, using Node Sass by default
         ],
-        // use: [
-        //   {
-        //     loader: MiniCssExtractPlugin.loader,
-        //     options: {
-        //       publicPath: '../'
-        //     }
-        //   },
-        //   'css-loader'
-        // ],
       },
       {
         test: /\.(ttf|eot|svg|gif|ico|jpg|png|bmp)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -84,7 +73,7 @@ module.exports = {
       }
     ]
   },
-  performance: false, // { hints: 'warning' },
+  performance: false,
   plugins: [
     new webpack.ProvidePlugin({
       React: 'react',

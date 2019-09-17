@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import './navigation.scss';
 
 const Location = (location) => {
   const { name, path } = location;

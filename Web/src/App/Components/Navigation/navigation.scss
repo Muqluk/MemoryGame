@@ -1,10 +1,9 @@
-@import '../../App/Static/vars.scss';
-@import '../../App/Static/vars.scss';
+@import 'css/vars.scss';
+@import 'css/vars.scss';
 
 .navigation {
   color: $border-dark;
   user-select: none;
-  user-drag: none;
   -webkit-user-drag: none;
   &.top__nav {
     ul {

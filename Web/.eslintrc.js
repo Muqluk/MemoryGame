@@ -1,4 +1,5 @@
 const path = require('path');
+require('@babel/register');
 
 module.exports = {
   env: {
@@ -9,10 +10,18 @@ module.exports = {
     jest: true
   },
   settings: {
-    'import/resolver': { // webpack
+    'import/resolver': {
+      alias: {
+        map: [
+          ['Components', './src/App/Components'],
+          ['css', './src/App/Static'],
+          ['Pages', './src/App/Pages'],
+          ['Store', './src/App/Store'],
+        ],
+      },
       webpack: {
         config: path.resolve('./conf/webpack.common.js'),
-      }
+      },
     }
   },
   globals: {
@@ -50,10 +59,9 @@ module.exports = {
     quotes: ['warn', 'single'],
     semi: ['warn', 'always'],
     radix: 0,
-    // 'import/extensions': 0,
     'import/prefer-default-export': 0,
     'import/no-unresolved': [2, { caseSensitive: true }],
-    'no-use-before-define': 0,
+    'no-use-before-define': 1,
     'arrow-parens': ["error", "always"],
     /*
     *  react specific
@@ -63,8 +71,8 @@ module.exports = {
     'react/jsx-indent': [2, 2],
     'react/jsx-indent-props': [2, 2],
     'react/jsx-first-prop-new-line': 0,
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
-    // 'react/jsx-closing-bracket-location':  'warn',//[1, 'after-props'],
+    'react/jsx-filename-extension': [1, { extensions: ['.jsx'] }],
+    'react/jsx-closing-bracket-location': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-static-element-interactions': 0,
     'react/prop-types': 0,
